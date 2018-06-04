@@ -27,7 +27,7 @@ export class SchedulePage {
   @ViewChild('scheduleList', { read: List }) scheduleList: List;
   @ViewChild(Content) content: Content;
 
-  items: any;
+  items: any = [];
   dayIndex = 0;
   queryText = '';
   segment = 'all';
@@ -38,7 +38,7 @@ export class SchedulePage {
   results: any = [];
   item: string;
   temp: any;
-  data: Array<{cat_id: string, cat_name: string, cat_img: string}> = [];
+  data: any = [];
   
   
   constructor(
@@ -53,7 +53,9 @@ export class SchedulePage {
     public navParams: NavParams,
     public meals: MealsdataProvider,
     public user: UserData
-  ) {}
+  ) {
+    this.updateTimeline();
+  }
 
   ionViewDidLoad() {
     this.updateTimeline();
@@ -61,6 +63,7 @@ export class SchedulePage {
    
   getItems(ev: any) {
 
+    this.initialize();
     let val = ev.target.value;
 
     if (val && val.trim() != '') {
@@ -77,12 +80,16 @@ export class SchedulePage {
       data => {
 
         if(this.excludeTracks) {
-          this.data = data;
-          this.data = this.data.filter(item => !this.excludeTracks.includes(item.cat_name));
+          this.items = data;
+          this.data = this.items.filter(item => !this.excludeTracks.includes(item.cat_name));
         }
         else
           this.data = data;
       });
+  }
+
+  initialize() {
+    this.data = this.items;
   }
 
   presentFilter() {
