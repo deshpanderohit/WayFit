@@ -65,18 +65,8 @@ export class ScheduleFilterPage {
 
   applyFilters() {
 
-    this.storage.remove('excludedTracks');
     let excludedTrackNames = this.tracks.filter(c => !c.isChecked).map(c => c.name);
-    //alert("Excluded Tracks: "+excludedTrackNames);
-    
-    //this.tracks = this.tracks.filter(item => excludedTrackNames.indexOf(item.name) < 0);
-    //alert("New String: "+str[0].name);
-    
-
-//    this.storage.set('excludedTracks',JSON.stringify(excludedTrackNames));
     this.dismiss(excludedTrackNames);
-
-    
   }
 
   resetFilters() {

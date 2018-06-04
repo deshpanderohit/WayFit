@@ -33,6 +33,7 @@ import { DescriptionPage } from '../pages/description/description';
 import { ItemsPage } from '../pages/items/items';
 import { TimePage } from '../pages/time/time';
 import { ToppingsPage } from '../pages/toppings/toppings';
+import { AddressPage } from '../pages/address/address';
 
 
 import { ConferenceData } from '../providers/conference-data';
@@ -46,6 +47,7 @@ import { MealsdataProvider } from '../providers/mealsdata/mealsdata';
     CusthomePage,
     ItemsPage,
     OffersPage,
+    AddressPage,
     ToppingsPage,
     DescriptionPage,
     SoupsPage,
@@ -96,6 +98,7 @@ import { MealsdataProvider } from '../providers/mealsdata/mealsdata';
     CusthomePage,
     OffersPage,
     TimePage,
+    AddressPage,
     ItemsPage,
     ToppingsPage,
     DescriptionPage,

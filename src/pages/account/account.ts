@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 
-import { AlertController, NavController } from 'ionic-angular';
+import { AlertController, NavController, ModalController } from 'ionic-angular';
 
 import { UserData } from '../../providers/user-data';
 
 import { OffersPage } from '../offers/offers';
+import { AddressPage } from '../address/address';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { OffersPage } from '../offers/offers';
 export class AccountPage {
   username: string;
 
-  constructor(public alertCtrl: AlertController, public nav: NavController, public userData: UserData) {
+  constructor(public alertCtrl: AlertController, public nav: NavController, public userData: UserData, public modalCtrl: ModalController) {
 
   }
 
@@ -54,7 +55,8 @@ export class AccountPage {
 
   getUsername() {
     this.userData.getUsername().then((username) => {
-      this.username = username;
+      this.username = username.toUpperCase();
+      
     });
   }
 
@@ -73,7 +75,10 @@ export class AccountPage {
 
 	offers() {
 		this.nav.push(OffersPage);
-	}
-
-
+  }
+  
+  manageaddress() {
+    let addrModal = this.modalCtrl.create(AddressPage,{},{showBackdrop: true, enableBackdropDismiss: true});
+    addrModal.present();
+  }
 }

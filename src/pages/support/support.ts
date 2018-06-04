@@ -27,9 +27,13 @@ export class SupportPage {
   submit(form: NgForm) {
     this.submitted = true;
 
+    
+
     if (form.valid) {
       this.supportMessage = '';
       this.submitted = false;
+
+      console.log("Form Data: "+JSON.stringify(form.value));
 
       let toast = this.toastCtrl.create({
         message: 'Your support request has been sent.',

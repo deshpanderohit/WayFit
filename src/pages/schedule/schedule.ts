@@ -53,47 +53,13 @@ export class SchedulePage {
     public navParams: NavParams,
     public meals: MealsdataProvider,
     public user: UserData
-  ) {
+  ) {}
 
-
-    this.meals.getCategories().subscribe(
-
-      data => {
-        this.items = data;
-        this.initialize();
-      });
-      
+  ionViewDidLoad() {
+    this.updateTimeline();
   }
-  
-  scroll() {
-    this.content.scrollToTop();
-  }
-
-
-  initialize() {
-    this.data = this.items;
-
-    
-/*    this.meals.getTracks().then(data => {
-      this.temp = JSON.stringify(data);
-      var arr = this.temp.split(",");
-      var i = 0;
-      this.items.forEach(value => {
-        this.data.push({
-          cat_id: value.cat_id,
-          cat_name: arr[i],
-          cat_img: value.cat_img
-        });
-        i++;
-      })
-      console.log("Data: "+JSON.stringify(this.data));
-    });
-    */
-  }
-
+   
   getItems(ev: any) {
-
-    this.initialize();
 
     let val = ev.target.value;
 
@@ -104,17 +70,18 @@ export class SchedulePage {
     }
   }
 
-  ionViewDidLoad() {
-    this.updateTimeline();
-  }
-
   updateTimeline() {
 
     this.meals.getCategories().subscribe(
 
       data => {
-        this.items = data;
-        this.data = this.items.filter(item => this.excludeTracks.indexOf(item.name) < 0);
+
+        if(this.excludeTracks) {
+          this.data = data;
+          this.data = this.data.filter(item => !this.excludeTracks.includes(item.cat_name));
+        }
+        else
+          this.data = data;
       });
   }
 
